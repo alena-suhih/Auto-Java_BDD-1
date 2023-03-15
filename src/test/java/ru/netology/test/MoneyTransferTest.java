@@ -1,10 +1,10 @@
-package ry.netology.test;
+package ru.netology.test;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ry.netology.data.DataGenerator;
-import ry.netology.page.DashboardPage;
-import ry.netology.page.LoginPage;
-import ry.netology.page.ReplenishPage;
+import ru.netology.data.DataGenerator;
+import ru.netology.page.LoginPage;
+
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -21,7 +21,11 @@ public class MoneyTransferTest {
 
         var firstCardInfo = DataGenerator.getFirstCardInfo();
         int firstCardBalance = dashboardPage.getCardBalanceByTestId(firstCardInfo.getTestId());
-        System.out.println("card balance " + firstCardBalance);
-        ReplenishPage replenishPage = dashboardPage.goToReplenishPageForCardById(firstCardInfo.getTestId());
+        var replenishPage = dashboardPage
+                .goToReplenishPageForCardById(firstCardInfo.getTestId());
+        replenishPage.fillData(DataGenerator.getSecondCardInfo().getCardNumber());
+        replenishPage.replenishCard();
+        int newFirstCardBalance = dashboardPage.getCardBalanceByTestId(firstCardInfo.getTestId());
+        Assertions.assertEquals(firstCardBalance + Integer.parseInt(DataGenerator.replenishSum), newFirstCardBalance);
     }
 }

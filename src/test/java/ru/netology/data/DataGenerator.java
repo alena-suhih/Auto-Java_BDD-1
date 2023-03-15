@@ -1,11 +1,13 @@
-package ry.netology.data;
+package ru.netology.data;
 
-import lombok.Data;
 import lombok.Value;
-import ry.netology.page.VerificationPage;
+
+import java.util.Random;
 
 public class DataGenerator {
     private DataGenerator(){}
+
+    public static String replenishSum = "100";
 
     public static AuthInfo getAuthInfo(){
         return new AuthInfo("vasya", "qwerty123");
@@ -21,6 +23,10 @@ public class DataGenerator {
 
     public static CardInfo getSecondCardInfo() {
         return new CardInfo("5559 0000 0000 0002", "0f3f5c2a-249e-4c3d-8287-09f7a039391d");
+    }
+
+    public static int generateValidAmount(int balance) {
+        return new Random().nextInt(balance) + 1;
     }
 
     @Value
