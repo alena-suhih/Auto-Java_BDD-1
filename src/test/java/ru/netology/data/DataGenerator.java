@@ -5,16 +5,15 @@ import lombok.Value;
 import java.util.Random;
 
 public class DataGenerator {
-    private DataGenerator(){}
+    private DataGenerator() {
+    }
 
-    public static String replenishSum = "100";
-
-    public static AuthInfo getAuthInfo(){
+    public static AuthInfo getAuthInfo() {
         return new AuthInfo("vasya", "qwerty123");
     }
 
     public static VerificationCode getVerificationCode() {
-        return new VerificationCode ("12345");
+        return new VerificationCode("12345");
     }
 
     public static CardInfo getFirstCardInfo() {
@@ -39,6 +38,7 @@ public class DataGenerator {
     public static class VerificationCode {
         private String code;
     }
+
     @Value
     public static class CardInfo {
         private String cardNumber;
